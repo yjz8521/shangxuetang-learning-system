@@ -1,0 +1,80 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { unitAssessments } from "../app/data/assessments.ts";
+import { curriculumWeeks } from "../app/data/curriculum.ts";
+import { lessons } from "../app/data/lessons.ts";
+import {
+  mergeStored,
+  nextReviewDate,
+  practiceStats,
+  REVIEW_INTERVALS,
+} from "../app/lib/study-core.ts";
+
+test("publishes fourteen substantive 60–90 minute lessons", () => {
+  assert.equal(lessons.length, 14);
+  assert.deepEqual(lessons.map((lesson) => lesson.day), Array.from({ length: 14 }, (_, index) => index + 1));
+  for (const lesson of lessons) {
+    assert.ok(lesson.duration >= 60 && lesson.duration <= 90);
+    assert.equal(lesson.schedule.reduce((sum, stage) => sum + stage.minutes, 0), lesson.duration);
+    assert.ok(lesson.objectives.length >= 3);
+    assert.ok(lesson.prerequisites.length >= 1);
+    assert.ok(lesson.core.length >= 3);
+    assert.ok(lesson.applications.length >= 3);
+    assert.ok(lesson.misconceptions.length >= 2);
+    assert.ok(lesson.questions.length >= 3);
+    assert.equal(lesson.reflectionPrompts.length, 3);
+    assert.match(lesson.example.label, /模拟/);
+  }
+});
+
+test("provides two complete unit assessments with ten questions and a case", () => {
+  assert.equal(unitAssessments.length, 2);
+  const ids = new Set<string>();
+  for (const assessment of unitAssessments) {
+    assert.equal(assessment.questions.length, 10);
+    assert.ok(assessment.caseStudy.prompt.length > 40);
+    assert.equal(assessment.caseStudy.rubric.length, 3);
+    assert.match(assessment.caseStudy.label, /模拟/);
+    for (const question of assessment.questions) {
+      assert.ok(!ids.has(question.id));
+      ids.add(question.id);
+    }
+  }
+});
+
+test("maps fifty-two weeks and schedules each fourth week for review", () => {
+  assert.equal(curriculumWeeks.length, 52);
+  assert.deepEqual(
+    curriculumWeeks.filter((week) => week.review).map((week) => week.week),
+    Array.from({ length: 13 }, (_, index) => (index + 1) * 4),
+  );
+});
+
+test("practice accuracy ignores Socratic answers", () => {
+  const firstQuestion = lessons[0].questions[0];
+  const stats = practiceStats(lessons, {
+    [firstQuestion.id]: firstQuestion.answer,
+    "d1-socratic": 0,
+  });
+  assert.deepEqual(stats, { questionsAnswered: 1, correct: 1, accuracy: 100 });
+});
+
+test("review dates use absolute 1, 3, 7, 14, 30-day nodes", () => {
+  assert.deepEqual(REVIEW_INTERVALS, [1, 3, 7, 14, 30]);
+  const review = { startedAt: "2026-01-01T12:00:00" };
+  const due = nextReviewDate(review, 1, "remembered", new Date("2026-01-02T12:00:00"));
+  const dueDate = new Date(due);
+  assert.deepEqual(
+    [dueDate.getFullYear(), dueDate.getMonth() + 1, dueDate.getDate()],
+    [2026, 1, 4],
+  );
+});
+
+test("older local records receive every current state collection", () => {
+  const merged = mergeStored({ currentDay: 3 });
+  assert.equal(merged.currentDay, 3);
+  assert.deepEqual(merged.lessonStartedAt, {});
+  assert.deepEqual(merged.unitQuizAnswers, {});
+  assert.deepEqual(merged.unitQuizCaseResponses, {});
+  assert.deepEqual(merged.unitQuizResults, {});
+});

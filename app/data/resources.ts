@@ -1,0 +1,263 @@
+export interface ResourceItem {
+  id: string;
+  category: "经济学公式" | "会计公式" | "会计科目" | "术语";
+  title: string;
+  expression?: string;
+  meaning: string;
+  example: string;
+  tags: string[];
+}
+
+export const resources: ResourceItem[] = [
+  {
+    id: "f-opportunity-cost",
+    category: "经济学公式",
+    title: "机会成本",
+    expression: "选择 A 的机会成本 = 放弃的最佳替代方案价值",
+    meaning: "不是所有放弃项目的总和，而是价值最高的那一个。",
+    example: "用 2 小时分析供应商，就放弃了这 2 小时可完成的最佳其他工作。",
+    tags: ["机会成本", "决策"],
+  },
+  {
+    id: "f-elasticity",
+    category: "经济学公式",
+    title: "需求价格弹性",
+    expression: "Ed = 需求量变动百分比 ÷ 价格变动百分比",
+    meaning: "通常取绝对值判断敏感程度；大于 1 为富有弹性。",
+    example: "价格上涨 5%，销量下降 10%，弹性绝对值约为 2。",
+    tags: ["弹性", "定价"],
+  },
+  {
+    id: "f-gdp",
+    category: "经济学公式",
+    title: "支出法 GDP",
+    expression: "GDP = C + I + G + (X − M)",
+    meaning: "消费、投资、政府购买与净出口之和。",
+    example: "进口计入 C/I/G 后，在 M 中扣除，避免把国外生产算入本国 GDP。",
+    tags: ["GDP", "宏观"],
+  },
+  {
+    id: "f-real-rate",
+    category: "经济学公式",
+    title: "实际利率近似",
+    expression: "实际利率 ≈ 名义利率 − 通胀率",
+    meaning: "反映购买力意义上的借贷成本或储蓄回报。",
+    example: "存款利率 3%、通胀 2%，实际回报约 1%。",
+    tags: ["利率", "通胀"],
+  },
+  {
+    id: "f-fx",
+    category: "经济学公式",
+    title: "汇率换算",
+    expression: "本币成本 = 外币金额 × 本币/外币报价",
+    meaning: "先确认报价方向，再计算汇率变动对进口成本的影响。",
+    example: "10,000 美元货款，汇率 7.20 元/美元，本币成本 72,000 元。",
+    tags: ["汇率", "国际贸易"],
+  },
+  {
+    id: "a-equation",
+    category: "会计公式",
+    title: "会计等式",
+    expression: "资产 = 负债 + 所有者权益",
+    meaning: "每笔交易都必须保持等式平衡，是复式记账与报表勾稽的骨架。",
+    example: "股东投入 10 万：现金 +10 万，实收资本 +10 万。",
+    tags: ["会计等式", "复式记账"],
+  },
+  {
+    id: "a-profit",
+    category: "会计公式",
+    title: "利润关系",
+    expression: "利润 = 收入 − 费用",
+    meaning: "利润增加权益，但不等于现金增加。",
+    example: "赊销会增加收入与应收账款，当期未必收到现金。",
+    tags: ["利润", "权责发生制"],
+  },
+  {
+    id: "a-gross-margin",
+    category: "会计公式",
+    title: "毛利率",
+    expression: "毛利率 = (营业收入 − 营业成本) ÷ 营业收入",
+    meaning: "衡量商品或服务在直接成本后的盈利空间。",
+    example: "售价 100、成本 70，毛利率为 30%。",
+    tags: ["毛利", "定价"],
+  },
+  {
+    id: "a-break-even",
+    category: "会计公式",
+    title: "盈亏平衡销量",
+    expression: "盈亏平衡量 = 固定成本 ÷ 单位贡献毛益",
+    meaning: "单位贡献毛益等于单位售价减单位变动成本。",
+    example: "固定成本 6 万，单件贡献 30 元，需要销售 2,000 件。",
+    tags: ["CVP", "经营决策"],
+  },
+  {
+    id: "a-roe",
+    category: "会计公式",
+    title: "净资产收益率 ROE",
+    expression: "ROE = 净利润 ÷ 平均股东权益",
+    meaning: "衡量公司利用股东资本创造利润的效率，需结合杠杆与盈余质量判断。",
+    example: "高 ROE 可能来自优秀经营，也可能来自过高负债或回购缩小权益。",
+    tags: ["ROE", "股票分析"],
+  },
+  {
+    id: "a-fcf",
+    category: "会计公式",
+    title: "自由现金流（简化）",
+    expression: "FCF = 经营活动现金流 − 资本性支出",
+    meaning: "观察企业维持与发展经营后可自由支配的现金。",
+    example: "净利润增长但自由现金流连续为负时，要检查应收、存货与扩张投入。",
+    tags: ["现金流", "估值"],
+  },
+  {
+    id: "acct-cash",
+    category: "会计科目",
+    title: "库存现金 / 银行存款",
+    meaning: "资产类；增加记借方，减少记贷方。",
+    example: "收到客户货款：借记银行存款。",
+    tags: ["资产", "借方"],
+  },
+  {
+    id: "acct-ar",
+    category: "会计科目",
+    title: "应收账款",
+    meaning: "资产类；已确认收入但尚未收到的客户款项。",
+    example: "赊销商品：借记应收账款，贷记主营业务收入。",
+    tags: ["资产", "营运资金"],
+  },
+  {
+    id: "acct-inventory",
+    category: "会计科目",
+    title: "库存商品",
+    meaning: "资产类；待售商品的成本，不是预计售价。",
+    example: "采购入库：借记库存商品，贷记银行存款或应付账款。",
+    tags: ["资产", "存货"],
+  },
+  {
+    id: "acct-ap",
+    category: "会计科目",
+    title: "应付账款",
+    meaning: "负债类；已取得商品或服务但尚未支付给供应商的款项。",
+    example: "赊购商品：借记库存商品，贷记应付账款。",
+    tags: ["负债", "营运资金"],
+  },
+  {
+    id: "acct-revenue",
+    category: "会计科目",
+    title: "主营业务收入",
+    meaning: "损益类收入；通常增加记贷方，期末结转至本年利润。",
+    example: "符合收入确认条件的销售：贷记主营业务收入。",
+    tags: ["收入", "贷方"],
+  },
+  {
+    id: "acct-cogs",
+    category: "会计科目",
+    title: "主营业务成本",
+    meaning: "损益类费用；销售商品对应的库存成本。",
+    example: "确认销售同时结转成本：借记主营业务成本，贷记库存商品。",
+    tags: ["费用", "毛利"],
+  },
+  {
+    id: "term-accrual",
+    category: "术语",
+    title: "权责发生制",
+    meaning: "收入和费用按经济事项发生期间确认，而非单看现金收付。",
+    example: "12 月已提供服务、1 月收款，通常在 12 月确认收入。",
+    tags: ["收入确认", "调整分录"],
+  },
+  {
+    id: "term-working-capital",
+    category: "术语",
+    title: "营运资金",
+    expression: "营运资金 = 流动资产 − 流动负债",
+    meaning: "观察企业短期经营资金缓冲，但仍需分析资产质量与到期结构。",
+    example: "存货积压会让营运资金看似充足，却可能难以及时变现。",
+    tags: ["流动性", "现金流"],
+  },
+  {
+    id: "term-comparative-advantage",
+    category: "术语",
+    title: "比较优势",
+    meaning: "以较低机会成本生产某项产品的能力，不等同于绝对生产效率更高。",
+    example: "即使一国两种商品都生产更快，双方仍可能因机会成本差异而互利贸易。",
+    tags: ["国际贸易", "机会成本"],
+  },
+  {
+    id: "term-earnings-quality",
+    category: "术语",
+    title: "盈余质量",
+    meaning: "利润是否可持续、是否有现金支持、是否少依赖一次性项目与激进估计。",
+    example: "利润上升但应收账款远快于收入增长，需检查回款与收入确认。",
+    tags: ["财报分析", "投资"],
+  },
+];
+
+export const knowledgeDomains = [
+  {
+    id: "econ-micro",
+    title: "微观经济学",
+    color: "teal",
+    nodes: ["经济学思维", "供需与均衡", "弹性", "消费者选择", "生产与成本", "市场结构", "博弈论", "市场失灵"],
+  },
+  {
+    id: "econ-macro",
+    title: "宏观与国际",
+    color: "blue",
+    nodes: ["GDP / CPI / 失业", "增长与周期", "货币与银行", "财政与货币政策", "通胀与利率", "汇率", "国际贸易", "开放经济"],
+  },
+  {
+    id: "accounting",
+    title: "财务会计",
+    color: "violet",
+    nodes: ["会计等式", "借贷记账", "账簿循环", "权责发生制", "资产与负债", "三大报表", "报表勾稽", "盈余质量"],
+  },
+  {
+    id: "management",
+    title: "管理会计",
+    color: "amber",
+    nodes: ["成本分类", "CVP", "预算", "标准成本", "差异分析", "定价", "自制或外购", "经营决策"],
+  },
+  {
+    id: "business",
+    title: "综合商业应用",
+    color: "coral",
+    nodes: ["贸易报价", "采购与库存", "应收与现金流", "汇率风险", "关税冲击", "公司融资", "年报阅读", "股票估值基础"],
+  },
+];
+
+export const newsAnalysisLenses = [
+  {
+    id: "facts",
+    title: "1. 事实与证据",
+    prompt: "新闻明确说了什么？数字、时期、地区与来源是什么？哪些只是评论或预测？",
+  },
+  {
+    id: "supply",
+    title: "2. 供需与市场",
+    prompt: "改变了哪一方的供给或需求？曲线如何移动？价格与数量的短期/长期影响是什么？",
+  },
+  {
+    id: "macro",
+    title: "3. 宏观传导",
+    prompt: "对 GDP、通胀、就业、利率、汇率或商业周期可能有什么影响？传导路径是什么？",
+  },
+  {
+    id: "trade",
+    title: "4. 国际贸易",
+    prompt: "谁具有比较优势？关税、汇率、贸易条件、国际收支或供应链怎样变化？",
+  },
+  {
+    id: "company",
+    title: "5. 公司财务",
+    prompt: "收入、成本、毛利、库存、应收、现金流和融资成本会受到什么影响？",
+  },
+  {
+    id: "stakeholders",
+    title: "6. 利益相关者与反方",
+    prompt: "消费者、员工、企业、政府分别得失什么？最强的反对解释是什么？",
+  },
+  {
+    id: "decision",
+    title: "7. 决策与验证",
+    prompt: "如果你是贸易公司经营者或投资者，会采取什么行动？还需要哪些数据才能下结论？",
+  },
+];
