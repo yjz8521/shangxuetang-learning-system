@@ -134,6 +134,8 @@ export interface StudySession {
   total: number;
 }
 
+import type { SiteLanguage } from "./language";
+
 export interface StudyState {
   currentDay: number;
   completedDays: number[];
@@ -157,7 +159,7 @@ export interface StudyState {
   unitQuizAnswers: Record<string, number>;
   unitQuizCaseResponses: Record<string, string>;
   unitQuizResults: Record<string, UnitQuizResult>;
-  language: "zh-CN" | "zh-TW";
+  language: SiteLanguage;
 }
 
 export type ViewId =

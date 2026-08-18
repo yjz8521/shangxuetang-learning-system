@@ -9,6 +9,7 @@ import {
   practiceStats,
   REVIEW_INTERVALS,
 } from "../app/lib/study-core.ts";
+import { convertChineseText } from "../app/lib/language.ts";
 
 test("publishes fourteen substantive 60–90 minute lessons", () => {
   assert.equal(lessons.length, 14);
@@ -77,4 +78,11 @@ test("older local records receive every current state collection", () => {
   assert.deepEqual(merged.unitQuizAnswers, {});
   assert.deepEqual(merged.unitQuizCaseResponses, {});
   assert.deepEqual(merged.unitQuizResults, {});
+});
+
+test("converts simplified and traditional Chinese with the selected language", () => {
+  const simplified = "经济学与会计学：学习、应用与选择";
+  const traditional = "經濟學與會計學：學習、應用與選擇";
+  assert.equal(convertChineseText(simplified, "zh-TW"), traditional);
+  assert.equal(convertChineseText(traditional, "zh-CN"), simplified);
 });

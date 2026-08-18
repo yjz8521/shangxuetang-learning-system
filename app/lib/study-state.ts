@@ -381,6 +381,13 @@ export function useStudyState() {
     setState(defaultState);
   }, []);
 
+  const toggleLanguage = useCallback(() => {
+    update((current) => ({
+      ...current,
+      language: current.language === "zh-CN" ? "zh-TW" : "zh-CN",
+    }));
+  }, [update]);
+
   return {
     state,
     hydrated,
@@ -399,5 +406,6 @@ export function useStudyState() {
     dueMistakes,
     dueReviews,
     resetProgress,
+    toggleLanguage,
   };
 }

@@ -43,6 +43,7 @@ import {
   ToolkitView,
 } from "./Views";
 import { LessonPlayer } from "./LessonPlayer";
+import { LanguageBridge } from "./LanguageBridge";
 
 export type StudyController = ReturnType<typeof useStudyState>;
 
@@ -101,6 +102,7 @@ export function LearningApp() {
   const [sidebarCompact, setSidebarCompact] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [helpOpen, setHelpOpen] = useState(false);
+  const [appRoot, setAppRoot] = useState<HTMLDivElement | null>(null);
 
   const activeDay = Math.min(Math.max(study.state.currentDay, 1), lessons.length);
   const activeLesson = lessons.find((lesson) => lesson.day === lessonDay) ?? lessons[activeDay - 1];
@@ -164,7 +166,8 @@ export function LearningApp() {
   };
 
   return (
-    <div className={`app-shell ${sidebarCompact ? "sidebar-compact" : ""}`}>
+    <div ref={setAppRoot} className={`app-shell ${sidebarCompact ? "sidebar-compact" : ""}`}>
+      <LanguageBridge root={appRoot} language={study.state.language} />
       <a className="skip-link" href="#main-content">跳到主要内容</a>
       <aside className={`sidebar ${sidebarOpen ? "mobile-open" : ""}`} aria-label="主导航">
         <div className="brand-row">
@@ -253,8 +256,14 @@ export function LearningApp() {
             <kbd>Ctrl K</kbd>
           </form>
           <div className="topbar-actions">
-            <button className="icon-button language-button" type="button" title="繁体中文预留" aria-label="语言：简体中文">
-              <Languages size={19} /><span>简</span>
+            <button
+              className="icon-button language-button"
+              type="button"
+              onClick={study.toggleLanguage}
+              title={study.state.language === "zh-CN" ? "切换为繁体中文" : "切换为简体中文"}
+              aria-label={study.state.language === "zh-CN" ? "当前为简体中文，切换为繁体中文" : "当前为繁体中文，切换为简体中文"}
+            >
+              <Languages size={19} /><span>{study.state.language === "zh-CN" ? "简" : "繁"}</span>
             </button>
             <button className="icon-button notification-button" type="button" onClick={() => navigate("reviews")} aria-label={`${study.dueReviews.length} 项到期复习`}>
               <Bell size={19} />

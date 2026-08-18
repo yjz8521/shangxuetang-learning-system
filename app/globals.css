@@ -40,8 +40,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.72;
   text-rendering: optimizeLegibility;
 }
 
@@ -3619,6 +3619,64 @@ kbd {
 .lesson-pagination small { color: var(--muted); font-size: 7px; }
 .lesson-pagination strong { font-size: 9px; }
 .lesson-pagination > span { color: var(--muted); font-size: 9px; }
+
+/* 阅读舒适度：课程正文和侧栏说明采用适合长时间学习的字号。 */
+.lesson-section-nav button strong { font-size: 13px; }
+.lesson-section-nav button small { font-size: 11px; }
+.lesson-time-plan strong { font-size: 11px; }
+.lesson-time-plan small { font-size: 10px; }
+.lesson-section-heading p { font-size: 14px; }
+.objectives-grid h3 { font-size: 18px; }
+.objectives-grid li { font-size: 13px; line-height: 1.65; }
+.socratic-label { font-size: 12px; }
+.socratic-card h2 { font-size: 24px; }
+.socratic-card > p { font-size: 14px; }
+.socratic-options button,
+.question-options button { min-height: 50px; font-size: 14px; line-height: 1.55; }
+.socratic-feedback strong,
+.answer-explanation strong { font-size: 14px; }
+.socratic-feedback p,
+.answer-explanation p { font-size: 14px; line-height: 1.7; }
+.socratic-feedback small,
+.answer-explanation small { font-size: 12px; }
+.content-block h2 { font-size: 24px; }
+.content-block p { font-size: 16px; line-height: 1.9; }
+.intuition-box strong,
+.extension-prompt strong,
+.review-preview strong { font-size: 14px; }
+.intuition-box p,
+.extension-prompt p,
+.review-preview p,
+.practice-intro p { font-size: 14px; line-height: 1.7; }
+.formula-section h2,
+.entry-section h2,
+.applications-section h2,
+.misconceptions h2,
+.reflection-section h2 { font-size: 24px; }
+.lesson-formula strong { font-size: 17px; }
+.lesson-formula p,
+.simulation-disclosure { font-size: 13px; line-height: 1.7; }
+.entry-table span,
+.entry-table strong,
+.entry-table small { font-size: 12px; }
+.case-heading small { font-size: 11px; }
+.case-heading h2 { font-size: 23px; }
+.case-scenario { font-size: 15px; line-height: 1.85; }
+.case-study li p,
+.case-conclusion p { font-size: 14px; line-height: 1.75; }
+.case-conclusion strong { font-size: 12px; }
+.lesson-visual p { font-size: 13px; line-height: 1.75; }
+.applications-section article p { font-size: 13px; line-height: 1.7; }
+.practice-intro { font-size: 14px; }
+.question-card > h2 { font-size: 20px; line-height: 1.55; }
+.summary-card li { font-size: 14px; line-height: 1.7; }
+.misconceptions strong { font-size: 14px; }
+.misconceptions p,
+.reflection-section > p { font-size: 13px; line-height: 1.7; }
+.reflection-grid label strong,
+.reflection-grid textarea { font-size: 13px; line-height: 1.7; }
+.completion-message p { font-size: 13px; line-height: 1.7; }
+.lesson-side-notes p { font-size: 12px; line-height: 1.6; }
 
 /* Unit assessments */
 .assessment-tabs {
