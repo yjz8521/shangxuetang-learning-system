@@ -99,7 +99,6 @@ export function DashboardView(props: SharedViewProps) {
       <section className="dashboard-hero-grid">
         <article className={`today-hero path-${meta.color}`}>
           <div className="today-hero-copy">
-            <span className="dashboard-hero-eyebrow">今天，继续把知识变成判断力</span>
             <div className="hero-kicker"><span>今日课程</span><em>DAY {day}</em><span className={`path-pill ${meta.color}`}>{meta.label}</span></div>
             <h2>{lesson.title}</h2>
             <p>{lesson.subtitle}</p>
@@ -114,6 +113,7 @@ export function DashboardView(props: SharedViewProps) {
               </button>
               <button className="secondary-button on-dark" type="button" onClick={() => navigate("curriculum")}>查看课程地图</button>
             </div>
+            <span className="dashboard-hero-motto">今天，继续把知识变成判断力</span>
           </div>
           <div className="today-progress-panel" aria-label={`今日进度 ${lessonProgress}%`}>
             <div className="progress-orbit" style={{ "--progress": `${lessonProgress * 3.6}deg` } as React.CSSProperties}>
