@@ -1,19 +1,36 @@
 import type { ChoiceQuestion, UnitAssessment } from "../lib/types";
 import { lessons } from "./lessons";
 
-const selectionIndexes = [0, 2, 4, 6, 8, 10, 12, 14, 17, 20];
+const QUESTIONS_PER_UNIT = 10;
 
+// 从某一周的题目池中，均匀抽取最多 QUESTIONS_PER_UNIT 道题。
+// 不写死索引：题池有多少题都安全，横跨整周各课均匀取样，
+// 题目不足 10 道时有几道取几道，绝不产生空题。
 function questionsForWeek(week: number): ChoiceQuestion[] {
   const pool = lessons
     .filter((lesson) => lesson.week === week)
     .flatMap((lesson) => lesson.questions);
-  return selectionIndexes.map((index, position) => {
-    const source = pool[index];
-    return {
-      ...source,
+
+  if (pool.length === 0) return [];
+
+  const count = Math.min(QUESTIONS_PER_UNIT, pool.length);
+
+  // 在题池上均匀取 count 个位置：题池越大，间隔越大，
+  // 保证抽到的题横跨整周，而不是全挤在前面几课。
+  const picked: ChoiceQuestion[] = [];
+  const seen = new Set<number>();
+  for (let position = 0; position < count; position += 1) {
+    let index = Math.round((position * (pool.length - 1)) / Math.max(count - 1, 1));
+    // 均匀取样在题池很小时可能算出重复索引，往后顺移到下一个未用位置。
+    while (seen.has(index)) index = (index + 1) % pool.length;
+    seen.add(index);
+    picked.push({
+      ...pool[index],
       id: `unit-${week}-q${position + 1}`,
-    };
-  });
+    });
+  }
+
+  return picked;
 }
 
 export const unitAssessments: UnitAssessment[] = [
