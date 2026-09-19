@@ -26,7 +26,7 @@ test("bank questions never reuse lesson practice question ids", () => {
 });
 
 test("every published unit week holds at least ten bank questions on all three paths", () => {
-  for (const week of [1, 2, 3, 4]) {
+  for (const week of [1, 2, 3, 4, 5, 6]) {
     const pool = bankQuestions.filter((question) => question.week === week);
     assert.ok(pool.length >= 10, `week ${week} has only ${pool.length} bank questions`);
     for (const path of ["economics", "accounting", "business"] as const) {
@@ -68,10 +68,10 @@ test("assessment composition is deterministic and ten questions wide", () => {
 });
 
 test("composed assessments do not leak a constant answer position", () => {
-  const positions = [1, 2, 3, 4]
+  const positions = [1, 2, 3, 4, 5, 6]
     .flatMap((week) => composeUnitAssessmentQuestions(week, bankQuestions))
     .map((question) => question.answer);
-  assert.equal(positions.length, 40);
+  assert.equal(positions.length, 60);
   assert.ok(
     new Set(positions).size >= 3,
     `answer index spread too narrow: ${positions.join(",")}`,
@@ -79,7 +79,7 @@ test("composed assessments do not leak a constant answer position", () => {
   const maxShare = Math.max(
     ...[0, 1, 2, 3].map((index) => positions.filter((position) => position === index).length),
   );
-  assert.ok(maxShare <= 16, `one answer position holds ${maxShare}/40 questions`);
+  assert.ok(maxShare <= 24, `one answer position holds ${maxShare}/60 questions`);
 });
 
 test("authored bank options keep the correct answer first and never reference letters", () => {
@@ -97,7 +97,7 @@ test("authored bank options keep the correct answer first and never reference le
 });
 
 test("bank pools mix recall, apply and analyze question kinds", () => {
-  for (const week of [1, 2, 3, 4]) {
+  for (const week of [1, 2, 3, 4, 5, 6]) {
     const kinds = new Set(
       bankQuestions.filter((question) => question.week === week).map((question) => question.kind),
     );
