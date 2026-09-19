@@ -7,7 +7,8 @@
 ## 当前完成范围
 
 - Day 1–14：完整可学习正文，不是标题占位。
-- 两个单元测验：每个单元 10 道综合选择题、1 道模拟商业案例、答案解析与掌握度。
+- 独立题库层（`app/data/questionBank.ts`）：与课内练习题完全分离的题目池，单元测验只从题库抽题，课内练习不会漏进考场。
+- 两个单元测验：每个单元 10 道综合选择题（由题库组卷器按周抽取并确定性旋转选项位置）、1 道模拟商业案例、答案解析与掌握度。
 - 52 周核心课程地图；另有第 53–78 周扩展包结构。
 - 三条路径：经济学、会计学、综合商业应用。
 - 苏格拉底模式、错题本、收藏、全站搜索、新闻分析模板和学习数据页。
@@ -22,7 +23,7 @@
 需要 Node.js 22.13 或更新版本。
 
 ```powershell
-cd "C:\Users\yjz85\Documents\Codex\2026-08-12\referenced-chatgpt-conversation-this-is-an"
+cd "C:\Users\yjz85\Documents\Qoder\2026-09-19\5c2c5dd6\shangxuetang-learning-system"
 npm ci
 npm run dev
 ```
@@ -41,7 +42,7 @@ npm run lint
 npm test
 ```
 
-`npm test` 会重新构建网站，并检查首页、14 天课程字段、两个单元测验、52 周地图、正确率口径与复习节点。
+`npm test` 会重新构建网站，并检查首页、14 天课程字段、独立题库 schema、两个单元测验（只抽题库未做过的新题、选项位置分布）、52 周地图、正确率口径与复习节点。
 
 ## 主要文件
 
@@ -54,17 +55,20 @@ app/
 │  └─ ConceptCanvas.tsx   # 教学图表与互动控制
 ├─ data/
 │  ├─ lessons.ts          # Day 1–14 完整课程
-│  ├─ assessments.ts      # 第一、第二单元测验与案例
+│  ├─ questionBank.ts     # 独立题库种子题（qb<week>-<nn>，与课内题分离）
+│  ├─ assessments.ts      # 第一、第二单元测验（题库组卷）与案例
 │  ├─ curriculum.ts       # 52 周课程地图和 53–78 周扩展包
 │  └─ resources.ts        # 公式、科目、术语、知识域和新闻分析框架
 ├─ lib/
-│  ├─ types.ts            # 课程、测验、复习和学习记录类型
+│  ├─ types.ts            # 课程、测验、题库、复习和学习记录类型
+│  ├─ question-bank.ts    # 题库 schema 验证器与单元组卷器
 │  ├─ study-core.ts       # 可测试的统计、复习日期和默认状态逻辑
 │  └─ study-state.ts      # localStorage、错题、复习和完成课程动作
 ├─ globals.css            # 桌面和手机响应式样式
 └─ page.tsx               # 网站入口
 tests/
 ├─ rendered-html.test.mjs
+├─ question-bank.test.ts
 └─ study-core.test.ts
 ```
 
@@ -122,13 +126,22 @@ tests/
 
 默认学习计划由 `makeLesson` 统一加入：8 分钟复习、25 分钟概念、18 分钟案例、18 分钟练习、6 分钟总结，共 75 分钟。若某课需要调整，可传入 60–90 分钟内的 `duration`，并同步修改计划生成逻辑或为该课提供独立计划。
 
+## 独立题库与组卷约定
+
+单元测验不再从课内练习题抽样，而是从 `app/data/questionBank.ts` 的独立题库按周组卷（`app/lib/question-bank.ts`）。新增题目必须遵守：
+
+1. id 用 `qb<week>-<nn>` 前缀，绝不与课内 `d<day>-q<n>` 重复；每题带 `path`、`week`、`kind`（recall／apply／analyze）与 `concept` 标签。
+2. 正确选项一律写在第 0 栏；考场上由组卷器按题目 id 做确定性旋转，学员看到的位置各不相同，但同一题对所有学员稳定重现。
+3. 解析必须含「因为」给出正当化，并逐一说明其余选项为何错；禁止出现裸 A／B／C／D 字母，必须以选项文字本身指称（因为位置会被旋转）。
+4. 每周三条路径各至少 2 题、全周至少 10 题，三种 kind 混合；`tests/question-bank.test.ts` 会逐条守住这些规则。
+
 ## 新增 Day 15 之后课程
 
 1. 在 `app/data/lessons.ts` 的数组末尾增加一个完整课程对象。
 2. 确保 `day` 连续、题目 `id` 全站唯一、案例明确标注“模拟”。
-3. 每课至少保留三道练习；每个单元另外在 `app/data/assessments.ts` 提供 10–20 道测验和案例题。
+3. 每课至少保留三道练习；同时按上面的题库约定，在 `app/data/questionBank.ts` 为该周补充至少 10 道新题，供该周单元测验组卷。
 4. 在 `app/data/curriculum.ts` 对应周次保持主题与每日课程一致。
-5. 执行 `npm test`；测试会检查课程时长、必需字段、周次与测验数量。
+5. 执行 `npm test`；测试会检查课程时长、必需字段、周次、题库 schema 与测验组卷质量。
 
 ## 扩展到完整 365 天
 

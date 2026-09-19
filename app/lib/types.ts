@@ -16,6 +16,15 @@ export interface ChoiceQuestion {
   concept: string;
 }
 
+export type QuestionKind = "recall" | "apply" | "analyze";
+
+/** 獨立題庫題目：五維標籤（id／path／week／kind／concept），供組卷與復習調度使用。 */
+export interface BankQuestion extends ChoiceQuestion {
+  path: PathId;
+  week: number;
+  kind: QuestionKind;
+}
+
 export interface Lesson {
   day: number;
   week: number;
