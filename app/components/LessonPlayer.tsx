@@ -29,6 +29,8 @@ import type { LessonSectionId, ViewId } from "../lib/types";
 import type { Lesson } from "../lib/types";
 import type { StudyController } from "./LearningApp";
 import { pathMeta } from "./LearningApp";
+import { lessons } from "../data/lessons";
+import { unitAssessments } from "../data/assessments";
 import { ConceptCanvas } from "./ConceptCanvas";
 
 const sectionIds: LessonSectionId[] = ["review", "concept", "case", "practice", "summary"];
@@ -226,7 +228,7 @@ export function LessonPlayer({ lesson, study, openLesson, navigate }: { lesson: 
               <div className="reflection-section"><span className="eyebrow">THREE QUESTIONS</span><h2>用自己的话完成今日反思</h2><p>反思不是抄总结。它让你区分“看懂了”和“能解释、会应用”。</p><div className="reflection-grid"><label><span>01</span><strong>{lesson.reflectionPrompts[0]}</strong><textarea rows={4} value={reflection.explain} onChange={(event) => setReflection((current) => ({ ...current, explain: event.target.value }))} placeholder="例如：我能不看资料解释…" /></label><label><span>02</span><strong>{lesson.reflectionPrompts[1]}</strong><textarea rows={4} value={reflection.unclear} onChange={(event) => setReflection((current) => ({ ...current, unclear: event.target.value }))} placeholder="写下具体卡点；没有也要写出最不确定处…" /></label><label><span>03</span><strong>{lesson.reflectionPrompts[2]}</strong><textarea rows={4} value={reflection.apply} onChange={(event) => setReflection((current) => ({ ...current, apply: event.target.value }))} placeholder="联系你的学习、投资或小公司经营…" /></label></div></div>
               <div className="review-preview"><RotateCcw size={22} /><div><strong>复习安排</strong><p>{lesson.reviewPreview}</p><span>1 天 → 3 天 → 7 天 → 14 天 → 30 天</span></div></div>
               {completionMessage && <div className={`completion-message ${lessonComplete ? "success" : "warning"}`} aria-live="polite">{lessonComplete ? <Trophy size={20} /> : <CircleAlert size={20} />}<p>{completionMessage}</p></div>}
-              <div className="lesson-completion-actions"><button className="secondary-button" type="button" onClick={() => changeSection(3)}><ChevronLeft size={16} /> 返回练习</button>{lessonComplete ? <>{lesson.day === 7 || lesson.day === 14 ? <button className="primary-button" type="button" onClick={() => navigate("assessments")}>进入第 {lesson.week} 单元测验 <ArrowRight size={16} /></button> : lesson.day < 14 ? <button className="primary-button" type="button" onClick={() => openLesson(lesson.day + 1)}>进入 Day {lesson.day + 1} <ArrowRight size={16} /></button> : <button className="primary-button" type="button" onClick={() => navigate("curriculum")}>查看长期课程地图 <ArrowRight size={16} /></button>}</> : <button className="primary-button complete-button" type="button" onClick={finishLesson}><CheckCircle2 size={17} /> 完成 Day {lesson.day}</button>}</div>
+              <div className="lesson-completion-actions"><button className="secondary-button" type="button" onClick={() => changeSection(3)}><ChevronLeft size={16} /> 返回练习</button>{lessonComplete ? <>{unitAssessments.some((assessment) => assessment.week === lesson.week) && lesson.day % 7 === 0 ? <button className="primary-button" type="button" onClick={() => navigate("assessments")}>进入第 {lesson.week} 单元测验 <ArrowRight size={16} /></button> : lesson.day < lessons.length ? <button className="primary-button" type="button" onClick={() => openLesson(lesson.day + 1)}>进入 Day {lesson.day + 1} <ArrowRight size={16} /></button> : <button className="primary-button" type="button" onClick={() => navigate("curriculum")}>查看长期课程地图 <ArrowRight size={16} /></button>}</> : <button className="primary-button complete-button" type="button" onClick={finishLesson}><CheckCircle2 size={17} /> 完成 Day {lesson.day}</button>}</div>
             </section>
           )}
         </article>
@@ -240,8 +242,8 @@ export function LessonPlayer({ lesson, study, openLesson, navigate }: { lesson: 
 
       <div className="lesson-pagination">
         <button type="button" disabled={lesson.day === 1} onClick={() => openLesson(lesson.day - 1)}><ChevronLeft size={17} /><span><small>上一课</small><strong>{lesson.day > 1 ? `Day ${lesson.day - 1}` : "这是第一课"}</strong></span></button>
-        <span>Day {lesson.day} / 14</span>
-        <button type="button" disabled={lesson.day === 14} onClick={() => openLesson(lesson.day + 1)}><span><small>下一课</small><strong>{lesson.day < 14 ? `Day ${lesson.day + 1}` : "已到完整课程末尾"}</strong></span><ChevronRight size={17} /></button>
+        <span>Day {lesson.day} / {lessons.length}</span>
+        <button type="button" disabled={lesson.day === lessons.length} onClick={() => openLesson(lesson.day + 1)}><span><small>下一课</small><strong>{lesson.day < lessons.length ? `Day ${lesson.day + 1}` : "已到完整课程末尾"}</strong></span><ChevronRight size={17} /></button>
       </div>
     </div>
   );

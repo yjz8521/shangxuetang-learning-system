@@ -1,12 +1,12 @@
 import type { CurriculumWeek } from "../lib/types";
 
-const reviewOutcome = "完成 18 题综合考试、案例题、错题归因与掌握度复盘";
+const reviewOutcome = "完成题库组卷综合考试、案例题、错题归因与掌握度复盘";
 
 export const curriculumWeeks: CurriculumWeek[] = [
   { week: 1, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "稀缺、激励、边际思考与实证/规范判断", accounting: "会计用途、主体、资产负债权益与会计等式", business: "模拟贸易公司开业交易与资金边界", outcome: "能解释一项选择，并判断交易如何改变会计等式" },
   { week: 2, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "机会成本、沉没成本、边际分析与 PPF", accounting: "科目、借贷方向、T 账户与复式记账", business: "两份订单选择与投入、采购、销售分录", outcome: "完成机会成本备忘录与 T 账户练习" },
-  { week: 3, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "需求、供给、曲线移动与非价格因素", accounting: "凭证、日记账、总账与过账", business: "运费与汇率冲击下的订单记录", outcome: "画出供需图并完成日记账到总账" },
-  { week: 4, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "均衡、短缺、剩余与价格管制", accounting: "试算平衡、查错与会计循环", business: "模拟公司第一个经营月结账", outcome: reviewOutcome, review: true },
+  { week: 3, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "价格管制、税负归宿与消费者/生产者剩余", accounting: "存货计价、销售收入与成本配比及会计循环", business: "订单成本归集、现金缺口与重置成本定价", outcome: "完成关税冲击订单的成本归集与收入结转全流程" },
+  { week: 4, month: 1, phase: "共同基础", level: "Lv1 Foundations", economics: "多重冲击叠加、弹性极端情形与政策备忘录", accounting: "差额查错、更正分录与调整分录综合", business: "三表勾稽、完整月结实战与综合考试复盘", outcome: reviewOutcome, review: true },
   { week: 5, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "需求价格、收入与交叉弹性", accounting: "现金制、权责发生制、收入费用确认", business: "调价、赊销、收入与现金的区别", outcome: "计算弹性并完成销售收入分录" },
   { week: 6, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "税负归宿与多重供需冲击", accounting: "预付、应计、递延与调整分录", business: "运费、关税和汇率共同变化", outcome: "完成冲击图与月末调整工作表" },
   { week: 7, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "效用、边际效用与预算约束", accounting: "利润表、资产负债表、现金流量表", business: "同一订单如何影响三大报表", outcome: "建立三表影响矩阵" },

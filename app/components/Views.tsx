@@ -157,7 +157,7 @@ export function DashboardView(props: SharedViewProps) {
           ]).map((path) => {
             const pathInfo = pathMeta[path.id];
             const Icon = pathInfo.icon;
-            return <button key={path.id} type="button" className={`dashboard-path-card ${pathInfo.color}`} onClick={() => openLesson(path.day)}><span><Icon size={27} /></span><div><strong>{pathInfo.label}</strong><small>前 14 天完成率 {path.progress}%</small></div><ArrowRight size={20} /></button>;
+            return <button key={path.id} type="button" className={`dashboard-path-card ${pathInfo.color}`} onClick={() => openLesson(path.day)}><span><Icon size={27} /></span><div><strong>{pathInfo.label}</strong><small>{`前 ${lessons.length} 天完成率 ${path.progress}%`}</small></div><ArrowRight size={20} /></button>;
           })}
         </section>
 
@@ -201,7 +201,7 @@ export function PathsView({ study, stats, openLesson, navigate }: SharedViewProp
 
   return (
     <div>
-      <PageHeading eyebrow="THREE CONNECTED PATHS" title="三条路径，训练同一种决策能力" description="路径彼此独立又相互连接。先懂市场为何变化，再看变化如何进入账簿和报表，最后做经营判断。" actions={<button className="primary-button" type="button" onClick={() => openLesson(Math.min(study.state.currentDay, 14))}>继续今日课程 <ArrowRight size={16} /></button>} />
+      <PageHeading eyebrow="THREE CONNECTED PATHS" title="三条路径，训练同一种决策能力" description="路径彼此独立又相互连接。先懂市场为何变化，再看变化如何进入账簿和报表，最后做经营判断。" actions={<button className="primary-button" type="button" onClick={() => openLesson(Math.min(study.state.currentDay, lessons.length))}>继续今日课程 <ArrowRight size={16} /></button>} />
       <section className="path-card-grid">
         {pathCards.map((path, index) => {
           const meta = pathMeta[path.id];
@@ -214,7 +214,7 @@ export function PathsView({ study, stats, openLesson, navigate }: SharedViewProp
               <h2>{meta.label}</h2>
               <p>{path.description}</p>
               <div className="path-module-list">{path.modules.map((module) => <span key={module}><Check size={14} /> {module}</span>)}</div>
-              <ProgressBar value={path.progress} label="前 14 天完成率" tone={meta.color} />
+              <ProgressBar value={path.progress} label={`前 ${lessons.length} 天完成率`} tone={meta.color} />
               <button className="secondary-button" type="button" onClick={() => openLesson(path.startDay)}>{path.progress ? "继续路径" : "从第一课开始"} <ArrowRight size={16} /></button>
             </article>
           );
@@ -233,7 +233,7 @@ export function PathsView({ study, stats, openLesson, navigate }: SharedViewProp
       </section>
 
       <section className="two-week-syllabus">
-        <div className="section-heading"><div><span className="eyebrow">READY NOW</span><h2>前 14 天完整课程</h2><p>以下不是标题占位：每一天都有讲解、模拟案例、图示、练习解析与反思。</p></div></div>
+        <div className="section-heading"><div><span className="eyebrow">READY NOW</span><h2>{`前 ${lessons.length} 天完整课程`}</h2><p>以下不是标题占位：每一天都有讲解、模拟案例、图示、练习解析与反思。</p></div></div>
         <div className="lesson-card-grid">
           {lessons.map((lesson) => {
             const meta = pathMeta[lesson.path];
@@ -251,7 +251,7 @@ export function PathsView({ study, stats, openLesson, navigate }: SharedViewProp
 
       <section className="panel curriculum-callout">
         <div className="callout-icon"><CalendarCheck2 size={27} /></div>
-        <div><span className="eyebrow">52-WEEK CORE</span><h2>核心课程 52 周，进阶扩展至 78 周</h2><p>每 4 周一次 18 题综合考试、案例题与复盘；最终完成模拟贸易公司董事会项目。</p></div>
+        <div><span className="eyebrow">52-WEEK CORE</span><h2>核心课程 52 周，进阶扩展至 78 周</h2><p>每 4 周一次题库组卷综合考试、案例题与复盘；最终完成模拟贸易公司董事会项目。</p></div>
         <button className="primary-button" type="button" onClick={() => navigate("curriculum")}>查看完整地图 <ArrowRight size={16} /></button>
       </section>
     </div>
@@ -268,7 +268,7 @@ export function CurriculumView({ openLesson }: SharedViewProps) {
 
   return (
     <div>
-      <PageHeading eyebrow="12–18 MONTH ROADMAP" title="从零基础到商业决策者" description="52 周核心课程覆盖本科关键知识与现实应用；第 53–78 周可继续做高级贸易、会计、年报与数据决策训练。" actions={<span className="content-status"><ShieldCheck size={16} /> Day 1–14 已完整发布</span>} />
+      <PageHeading eyebrow="12–18 MONTH ROADMAP" title="从零基础到商业决策者" description="52 周核心课程覆盖本科关键知识与现实应用；第 53–78 周可继续做高级贸易、会计、年报与数据决策训练。" actions={<span className="content-status"><ShieldCheck size={16} /> {`Day 1–${lessons.length} 已完整发布`}</span>} />
       <section className="phase-timeline">
         {phases.map((phase, index) => (
           <button key={phase.id} type="button" className={activePhase === phase.title ? "active" : ""} onClick={() => setActivePhase(activePhase === phase.title ? "all" : phase.title)}>
@@ -277,7 +277,7 @@ export function CurriculumView({ openLesson }: SharedViewProps) {
         ))}
       </section>
       <div className="curriculum-legend">
-        <span><i className="complete" /> 完整课程（Day 1–14）</span><span><i className="outline" /> 课程大纲（待后续填充）</span><span><i className="exam" /> 综合考试与复盘</span>
+        <span><i className="complete" /> {`完整课程（Day 1–${lessons.length}）`}</span><span><i className="outline" /> 课程大纲（待后续填充）</span><span><i className="exam" /> 综合考试与复盘</span>
       </div>
       <section className="curriculum-months">
         {Object.entries(grouped).map(([month, weeks]) => (
@@ -285,14 +285,14 @@ export function CurriculumView({ openLesson }: SharedViewProps) {
             <div className="month-heading"><span>教学月 {String(month).padStart(2, "0")}</span><div><strong>{weeks[0].phase}</strong><small>{weeks[0].level}</small></div><em>4 周 · 约 28 天</em></div>
             <div className="week-grid">
               {weeks.map((week) => {
-                const hasFullLessons = week.week <= 2;
+                const hasFullLessons = (week.week - 1) * 7 < lessons.length;
                 return (
                   <div key={week.week} className={`week-card ${week.review ? "review" : ""}`}>
                     <div className="week-card-top"><span>WEEK {String(week.week).padStart(2, "0")}</span>{week.review ? <em><Trophy size={14} /> 综合考试</em> : hasFullLessons ? <em className="published"><Check size={14} /> 已发布</em> : <em className="outline-label">课程大纲</em>}</div>
                     <h3>{week.business.split("、")[0]}</h3>
                     <dl><div><dt>经济学</dt><dd>{week.economics}</dd></div><div><dt>会计学</dt><dd>{week.accounting}</dd></div><div><dt>商业应用</dt><dd>{week.business}</dd></div></dl>
                     <div className="week-outcome"><Target size={15} /><span>{week.outcome}</span></div>
-                    {hasFullLessons ? <button className="text-link" type="button" onClick={() => openLesson(week.week === 1 ? 1 : 8)}>打开完整课程 <ChevronRight size={15} /></button> : <span className="future-note"><LockKeyhole size={14} /> 数据结构已建立，正文将持续扩写</span>}
+                    {hasFullLessons ? <button className="text-link" type="button" onClick={() => openLesson((week.week - 1) * 7 + 1)}>打开完整课程 <ChevronRight size={15} /></button> : <span className="future-note"><LockKeyhole size={14} /> 数据结构已建立，正文将持续扩写</span>}
                   </div>
                 );
               })}
@@ -358,7 +358,7 @@ export function MistakesView({ study, openLesson }: SharedViewProps) {
     <div>
       <PageHeading eyebrow="ERROR LOG" title="错题不是污点，是诊断证据" description="保留当时答案、正确答案和原因。完成不同日期的复习节点后，错题才会真正退出强化队列。" />
       <div className="filter-bar"><button type="button" className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>全部 {study.state.mistakes.length}</button>{concepts.map((concept) => <button type="button" key={concept} className={filter === concept ? "active" : ""} onClick={() => setFilter(concept)}>{concept}</button>)}</div>
-      {mistakes.length ? <section className="mistake-list">{mistakes.map((item) => <article className="mistake-card" key={item.questionId}><div className="mistake-top"><span className={item.resolved ? "resolved" : "unresolved"}>{item.resolved ? <CheckCircle2 size={15} /> : <CircleAlert size={15} />}{item.resolved ? "已掌握" : "需强化"}</span><em>Day {item.day} · 错误 {item.attempts} 次</em></div><h2>{item.prompt}</h2><div className="answer-comparison"><div className="wrong-answer"><span>当时答案</span><strong>{item.selected}</strong></div><div className="correct-answer"><span>正确答案</span><strong>{item.correct}</strong></div></div><p>{item.explanation}</p><div className="mistake-footer"><span><RotateCcw size={15} /> 当前复习阶段 {item.stage}/5</span><button className="text-link" type="button" onClick={() => openLesson(item.day)}>返回原课 <ChevronRight size={15} /></button></div></article>)}</section> : <section className="empty-state large"><span><NotebookPen size={30} /></span><h2>还没有错题记录</h2><p>作答后，答错题会自动保存。系统不会用“看完课程”冒充“已经掌握”。</p><button className="primary-button" type="button" onClick={() => openLesson(Math.min(study.state.currentDay, 14))}>去做练习 <ArrowRight size={16} /></button></section>}
+      {mistakes.length ? <section className="mistake-list">{mistakes.map((item) => <article className="mistake-card" key={item.questionId}><div className="mistake-top"><span className={item.resolved ? "resolved" : "unresolved"}>{item.resolved ? <CheckCircle2 size={15} /> : <CircleAlert size={15} />}{item.resolved ? "已掌握" : "需强化"}</span><em>Day {item.day} · 错误 {item.attempts} 次</em></div><h2>{item.prompt}</h2><div className="answer-comparison"><div className="wrong-answer"><span>当时答案</span><strong>{item.selected}</strong></div><div className="correct-answer"><span>正确答案</span><strong>{item.correct}</strong></div></div><p>{item.explanation}</p><div className="mistake-footer"><span><RotateCcw size={15} /> 当前复习阶段 {item.stage}/5</span><button className="text-link" type="button" onClick={() => openLesson(item.day)}>返回原课 <ChevronRight size={15} /></button></div></article>)}</section> : <section className="empty-state large"><span><NotebookPen size={30} /></span><h2>还没有错题记录</h2><p>作答后，答错题会自动保存。系统不会用“看完课程”冒充“已经掌握”。</p><button className="primary-button" type="button" onClick={() => openLesson(Math.min(study.state.currentDay, lessons.length))}>去做练习 <ArrowRight size={16} /></button></section>}
     </div>
   );
 }
@@ -492,7 +492,7 @@ export function SearchView({ query, setQuery, openLesson }: SharedViewProps & { 
   const count = lessonResults.length + resourceResults.length + weekResults.length;
   return (
     <div>
-      <PageHeading eyebrow="GLOBAL SEARCH" title="搜索整个学习系统" description="可搜索前 14 天完整课程、52 周课程地图、公式、会计科目和术语。" />
+      <PageHeading eyebrow="GLOBAL SEARCH" title="搜索整个学习系统" description={`可搜索前 ${lessons.length} 天完整课程、52 周课程地图、公式、会计科目和术语。`} />
       <label className="search-page-input"><Search size={22} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：机会成本、应收账款、汇率、ROE…" /><kbd>Enter</kbd></label>
       {normalized ? <><div className="search-count">找到 <strong>{count}</strong> 个结果</div><section className="search-results">{lessonResults.map((lesson) => <button type="button" key={`lesson-${lesson.day}`} onClick={() => openLesson(lesson.day)}><span className="result-type lesson">完整课程</span><div><h2>Day {lesson.day} · {lesson.title}</h2><p>{lesson.subtitle}</p><small>{lesson.tags.join(" · ")}</small></div><ChevronRight size={18} /></button>)}{resourceResults.map((resource) => <article key={resource.id}><span className="result-type resource">{resource.category}</span><div><h2>{resource.title}</h2><p>{resource.meaning}</p>{resource.expression && <small>{resource.expression}</small>}</div></article>)}{weekResults.map((week) => <article key={`week-${week.week}`}><span className="result-type outline">课程地图</span><div><h2>Week {week.week} · {week.phase}</h2><p>{week.business}</p><small>{week.economics} / {week.accounting}</small></div></article>)}</section>{!count && <div className="empty-state large"><Search size={30} /><h2>没有找到“{query}”</h2><p>试试较短关键词，例如“现金流”“弹性”或“关税”。</p></div>}</> : <section className="search-suggestions"><span>热门入口</span>{["机会成本", "会计等式", "供需", "借贷记账", "弹性", "现金流", "汇率", "ROE"].map((item) => <button type="button" key={item} onClick={() => setQuery(item)}>{item}</button>)}</section>}
     </div>

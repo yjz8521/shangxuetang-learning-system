@@ -11,10 +11,18 @@ import {
 } from "../app/lib/study-core.ts";
 import { convertChineseText } from "../app/lib/language.ts";
 
-test("publishes fourteen substantive 60–90 minute lessons", () => {
-  assert.equal(lessons.length, 14);
-  assert.deepEqual(lessons.map((lesson) => lesson.day), Array.from({ length: 14 }, (_, index) => index + 1));
+test("publishes twenty-eight substantive 60–90 minute lessons across four weeks", () => {
+  assert.equal(lessons.length, 28);
+  assert.deepEqual(lessons.map((lesson) => lesson.day), Array.from({ length: 28 }, (_, index) => index + 1));
+  for (const week of [1, 2, 3, 4]) {
+    assert.equal(
+      lessons.filter((lesson) => lesson.week === week).length,
+      7,
+      `week ${week} must hold exactly seven lessons (Day ${(week - 1) * 7 + 1}–${week * 7})`,
+    );
+  }
   for (const lesson of lessons) {
+    assert.equal(lesson.week, Math.ceil(lesson.day / 7));
     assert.ok(lesson.duration >= 60 && lesson.duration <= 90);
     assert.equal(lesson.schedule.reduce((sum, stage) => sum + stage.minutes, 0), lesson.duration);
     assert.ok(lesson.objectives.length >= 3);
@@ -28,8 +36,8 @@ test("publishes fourteen substantive 60–90 minute lessons", () => {
   }
 });
 
-test("provides two complete unit assessments with ten questions and a case", () => {
-  assert.equal(unitAssessments.length, 2);
+test("provides four complete unit assessments with ten questions and a case", () => {
+  assert.equal(unitAssessments.length, 4);
   const ids = new Set<string>();
   for (const assessment of unitAssessments) {
     assert.equal(assessment.questions.length, 10);
