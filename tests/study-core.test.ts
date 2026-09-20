@@ -11,10 +11,10 @@ import {
 } from "../app/lib/study-core.ts";
 import { convertChineseText } from "../app/lib/language.ts";
 
-test("publishes forty-two substantive 60–90 minute lessons across six weeks", () => {
-  assert.equal(lessons.length, 42);
-  assert.deepEqual(lessons.map((lesson) => lesson.day), Array.from({ length: 42 }, (_, index) => index + 1));
-  for (const week of [1, 2, 3, 4, 5, 6]) {
+test("publishes forty-nine substantive 60–90 minute lessons across seven weeks", () => {
+  assert.equal(lessons.length, 49);
+  assert.deepEqual(lessons.map((lesson) => lesson.day), Array.from({ length: 49 }, (_, index) => index + 1));
+  for (const week of [1, 2, 3, 4, 5, 6, 7]) {
     assert.equal(
       lessons.filter((lesson) => lesson.week === week).length,
       7,
@@ -36,8 +36,8 @@ test("publishes forty-two substantive 60–90 minute lessons across six weeks", 
   }
 });
 
-test("provides six complete unit assessments with ten questions and a case", () => {
-  assert.equal(unitAssessments.length, 6);
+test("provides seven complete unit assessments with ten questions and a case", () => {
+  assert.equal(unitAssessments.length, 7);
   const ids = new Set<string>();
   for (const assessment of unitAssessments) {
     assert.equal(assessment.questions.length, 10);
