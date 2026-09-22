@@ -10,7 +10,7 @@ export const curriculumWeeks: CurriculumWeek[] = [
   { week: 5, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "弹性家族、弹性定价与效用预算约束", accounting: "银行余额调节表、应收备抵与带息票据", business: "从出厂价到 CIF 的倒挤报价", outcome: "完成银行存款余额调节表与一份含目标毛利的 CIF 报价" },
   { week: 6, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "短期成本、完全竞争与垄断定价", accounting: "折旧进阶、资产处置与实地盘点", business: "现金流预测与营运资金周转", outcome: "算出现金转换周期并完成三个月滚动现金表" },
   { week: 7, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "市场失灵入门：外部性与信息不对称", accounting: "利润表、资产负债表、现金流量表", business: "同一订单如何影响三大报表", outcome: "建立三表影响矩阵" },
-  { week: 8, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "消费者剩余、生产者剩余与无谓损失", accounting: "结账分录与结账后试算平衡", business: "调价、赊销、期末调整综合案例", outcome: reviewOutcome, review: true },
+  { week: 8, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "福利复算：税、补贴、限价与垄断的社会账", accounting: "结账分录与结账后试算平衡", business: "综合案例、第二次综合考试与错因复盘", outcome: reviewOutcome, review: true },
   { week: 9, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "无差异曲线、MRS 与最优选择", accounting: "现金控制与银行存款调节表", business: "客户分层、产品组合与收款控制", outcome: "绘制消费者选择图并完成银行调节表" },
   { week: 10, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "生产函数与边际报酬递减", accounting: "应收、坏账、应付与信用条件", business: "客户信用期和供应商账期", outcome: "制作应收应付账龄与现金影响表" },
   { week: 11, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "经济利润、固定变动与边际成本", accounting: "存货、FIFO、加权平均与销售成本", business: "进口落地成本、存货与毛利率", outcome: "完成成本曲线与存货明细" },
