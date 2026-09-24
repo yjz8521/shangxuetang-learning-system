@@ -11,7 +11,7 @@ export const curriculumWeeks: CurriculumWeek[] = [
   { week: 6, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "短期成本、完全竞争与垄断定价", accounting: "折旧进阶、资产处置与实地盘点", business: "现金流预测与营运资金周转", outcome: "算出现金转换周期并完成三个月滚动现金表" },
   { week: 7, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "市场失灵入门：外部性与信息不对称", accounting: "利润表、资产负债表、现金流量表", business: "同一订单如何影响三大报表", outcome: "建立三表影响矩阵" },
   { week: 8, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "福利复算：税、补贴、限价与垄断的社会账", accounting: "结账分录与结账后试算平衡", business: "综合案例、第二次综合考试与错因复盘", outcome: reviewOutcome, review: true },
-  { week: 9, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "无差异曲线、MRS 与最优选择", accounting: "现金控制与银行存款调节表", business: "客户分层、产品组合与收款控制", outcome: "绘制消费者选择图并完成银行调节表" },
+  { week: 9, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "无差异曲线、MRS 与最优选择", accounting: "资金内部控制与结算工具", business: "客户分层、产品组合与信用收款", outcome: "画出消费者切点图并写成一页含折扣年化的信用政策" },
   { week: 10, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "生产函数与边际报酬递减", accounting: "应收、坏账、应付与信用条件", business: "客户信用期和供应商账期", outcome: "制作应收应付账龄与现金影响表" },
   { week: 11, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "经济利润、固定变动与边际成本", accounting: "存货、FIFO、加权平均与销售成本", business: "进口落地成本、存货与毛利率", outcome: "完成成本曲线与存货明细" },
   { week: 12, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "利润最大化与停产条件", accounting: "盘点差异、跌价与存货错误", business: "库存、赊销与采购量决策", outcome: reviewOutcome, review: true },
