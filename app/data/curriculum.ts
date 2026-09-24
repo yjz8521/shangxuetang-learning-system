@@ -12,7 +12,7 @@ export const curriculumWeeks: CurriculumWeek[] = [
   { week: 7, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "市场失灵入门：外部性与信息不对称", accounting: "利润表、资产负债表、现金流量表", business: "同一订单如何影响三大报表", outcome: "建立三表影响矩阵" },
   { week: 8, month: 2, phase: "共同基础", level: "Lv1 Foundations", economics: "福利复算：税、补贴、限价与垄断的社会账", accounting: "结账分录与结账后试算平衡", business: "综合案例、第二次综合考试与错因复盘", outcome: reviewOutcome, review: true },
   { week: 9, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "无差异曲线、MRS 与最优选择", accounting: "资金内部控制与结算工具", business: "客户分层、产品组合与信用收款", outcome: "画出消费者切点图并写成一页含折扣年化的信用政策" },
-  { week: 10, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "生产函数与边际报酬递减", accounting: "应收、坏账、应付与信用条件", business: "客户信用期和供应商账期", outcome: "制作应收应付账龄与现金影响表" },
+  { week: 10, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "生产三阶段、等产量线与规模报酬", accounting: "应付信用条件、双边账龄表与短期融资", business: "供应商账期谈判与一页接单判断表", outcome: "制作应收应付账龄与现金影响表，并给三条融资路标上年化利率" },
   { week: 11, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "经济利润、固定变动与边际成本", accounting: "存货、FIFO、加权平均与销售成本", business: "进口落地成本、存货与毛利率", outcome: "完成成本曲线与存货明细" },
   { week: 12, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "利润最大化与停产条件", accounting: "盘点差异、跌价与存货错误", business: "库存、赊销与采购量决策", outcome: reviewOutcome, review: true },
   { week: 13, month: 4, phase: "微观与会计核心", level: "Lv2 Core", economics: "完全竞争与进入退出", accounting: "固定资产资本化、折旧与处置", business: "低毛利行业的设备与退出决策", outcome: "完成竞争市场分析与固定资产卡" },
