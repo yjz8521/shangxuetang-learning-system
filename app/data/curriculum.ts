@@ -15,7 +15,7 @@ export const curriculumWeeks: CurriculumWeek[] = [
   { week: 10, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "生产三阶段、等产量线与规模报酬", accounting: "应付信用条件、双边账龄表与短期融资", business: "供应商账期谈判与一页接单判断表", outcome: "制作应收应付账龄与现金影响表，并给三条融资路标上年化利率" },
   { week: 11, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "经济利润、五列成本曲线与停产退出门槛", accounting: "存货成本流转、毛利法估算与差异调查", business: "进口落地成本、订货量与报价链", outcome: "算出落地成本与保本量，并用毛利法估出期末存货" },
   { week: 12, month: 3, phase: "微观与会计核心", level: "Lv2 Core", economics: "复算：选择与生产的同构、三条价格线", accounting: "复算：应收备抵与存货跌价、现金月历", business: "综合报价案例、第三次综合考试与第三月错因地图", outcome: reviewOutcome, review: true },
-  { week: 13, month: 4, phase: "微观与会计核心", level: "Lv2 Core", economics: "完全竞争与进入退出", accounting: "固定资产资本化、折旧与处置", business: "低毛利行业的设备与退出决策", outcome: "完成竞争市场分析与固定资产卡" },
+  { week: 13, month: 4, phase: "微观与会计核心", level: "Lv3 Applied", economics: "价格接受者、行业供给加总与要素涨价", accounting: "资本化范围、三种折旧切法与处置损益", business: "设备月成本、产能利用率与扩产四格卡", outcome: "完成竞争定位分析与扩产四格判断卡" },
   { week: 14, month: 4, phase: "微观与会计核心", level: "Lv2 Core", economics: "垄断、加价与价格歧视", accounting: "无形资产、摊销、减值与研发", business: "品牌、授权与平台力量", outcome: "完成定价与无形资产判断表" },
   { week: 15, month: 4, phase: "微观与会计核心", level: "Lv2 Core", economics: "寡头、占优策略与纳什均衡", accounting: "流动/非流动负债、利息与或有事项", business: "竞争者调价与供应商谈判", outcome: "建立策略矩阵与负债利息表" },
   { week: 16, month: 4, phase: "微观与会计核心", level: "Lv2 Core", economics: "市场结构、进入壁垒与竞争政策", accounting: "公司会计、普通股、留存收益与股利", business: "市场进入与贷款/增资比较", outcome: reviewOutcome, review: true },
